@@ -1,34 +1,34 @@
 <template>
-    <div class="card">
-        <md-card md-with-hover>
-            <md-ripple>
-                <md-card-media-cover md-text-scrim>
-                    <md-card-media md-ratio="16:9">
-                        <img src="../assets/logo.png" alt="New york">
-                    </md-card-media>
+    <div class="card" >
+        <b-card
+                text-variant="white"
+                title="New york"
 
-                    <md-card-area>
-                        <md-card-header>
-                            <span class="md-title">{{name}}</span>
-                        </md-card-header>
+        >
+            <b-button variant="outline-light" @click="changeTempSelector">
+                <font-awesome-icon :icon="['fa','thermometer-half']"></font-awesome-icon>
+                <h2 v-if="isCelsius">{{tempC}} °C</h2>
+                <h2 v-else>{{tempF}} °F</h2>
+            </b-button>
 
-                        <md-card-actions>
-                            <md-button  v-on:click="changeTempSelector">
-                                <span class="md-headline">
-                                    <span v-if="isCelsius">{{tempC}}°C</span>
-                                    <span v-else>{{tempF}}°F</span>
-                                </span>
-                            </md-button>
-                            <md-button>Action</md-button>
-                        </md-card-actions>
-                    </md-card-area>
-                </md-card-media-cover>
-            </md-ripple>
-        </md-card>
+            <b-row>
+                <b-col>
+                    <font-awesome-icon :icon="['fa','tint']"></font-awesome-icon>
+                    <h2>{{humidity}} %</h2>
+                </b-col>
+                <b-col>
+                    <font-awesome-icon :icon="['fa','wind']"></font-awesome-icon>
+                    <h2>{{wind}} m/s</h2>
+                </b-col>
+            </b-row>
+        </b-card>
     </div>
 </template>
 
 <script>
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+
     export default {
         name: "CityCard",
         data() {
@@ -36,7 +36,10 @@
                 name: "New york",
                 tempC: 35,
                 tempF: 170,
-                isCelsius: true
+                isCelsius: true,
+                humidity: 54,
+                wind: 7,
+
             }
         },
         methods: {
@@ -47,11 +50,7 @@
     }
 </script>
 
-<style scoped>
-    .card {
-        width: 320px;
-        margin: 4px;
-        display: inline-block;
-        vertical-align: top;
-    }
+<style lang="scss" scoped>
+
+
 </style>

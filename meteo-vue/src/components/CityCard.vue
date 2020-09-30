@@ -8,22 +8,28 @@
                     </md-card-media>
                     <md-card-area>
                         <md-card-header-text>
-                            <h1 class="md-title">{{datas.name}}</h1>
+                            <h1 class="md-display-2" style="color: white">{{data.name}}</h1>
+                            <img v-bind:src="'http://openweathermap.org/img/wn/'+data.weather[0].icon+'@2x.png'" alt="New york">
                         </md-card-header-text>
-                        <div class="md-layout md-gutter ">
+                        <div class="md-layout md-gutter">
                             <div class="md-layout-item md-with-hover" @click="changeTempSelector">
                                 <font-awesome-icon :icon="['fa','thermometer-half']"
                                                    size="3x"></font-awesome-icon>
-                                <h2 v-if="isCelsius">{{datas.main.temp | fahrenheitToCelsius}} °C</h2>
-                                <h2 v-else>{{datas.main.temp}} °F</h2>
+                                <div class="md-gutter">
+                                        <span>{{data.main.temp_max | celsiusOrFahrenheit(isCelsius)}}</span>
+                                        <h2 >{{data.main.temp | celsiusOrFahrenheit(isCelsius)}}</h2>
+                                        <span >{{data.main.temp_min | celsiusOrFahrenheit(isCelsius)}}</span>
+                                </div>
+
                             </div>
                             <div class="md-layout-item">
                                 <font-awesome-icon :icon="['fa','tint']" size="3x"></font-awesome-icon>
-                                <h2>{{datas.main.humidity}} %</h2>
+                                <h2>{{data.main.humidity}} %</h2>
                             </div>
                             <div class="md-layout-item">
                                 <font-awesome-icon :icon="['fa','wind']" size="3x"></font-awesome-icon>
-                                <h2>{{datas.wind.speed}} m/s</h2>
+                                <h2>{{data.wind.speed}} m/s</h2>
+                                <font-awesome-icon :icon="['fas','long-arrow-alt-down']" size="2x"  v-bind:style="{transform:'rotate('+data.wind.deg+'deg)'}"></font-awesome-icon>
                             </div>
                         </div>
                     </md-card-area>
@@ -34,38 +40,30 @@
 </template>
 
 <script>
-    import axios from "axios";
 
     export default {
         name: "CityCard",
-        props: {city:String},
+        props: {data: Object},
         data() {
             return {
-                isCelsius:false,
-                datas:{}
+                isCelsius: true
             }
         },
         methods: {
             changeTempSelector: function () {
                 this.isCelsius = !this.isCelsius;
             }
-        },filters: {
-            fahrenheitToCelsius: function (value) {
-
-                return (value - 32) * 5/9 ;
+        }, filters: {
+            celsiusOrFahrenheit: function (value,isCelsius) {
+                    return isCelsius ? value.toFixed(1)+ "°C" : ""+(value * 1.8000 + 32.00).toFixed(1) +"°F";
             }
-        }, mounted() {
-        axios
-            .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&appid=2a2b833d0dede9d3979171b2be94f7a4")
-            .then(response => (this.datas=response))
-            .then(() => console.log(this.datas))
-
-    }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
     .card {
+
         width: 40em;
         margin: 4px;
         display: inline-block;

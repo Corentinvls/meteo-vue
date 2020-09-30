@@ -7,10 +7,12 @@
 
 
 <script>
-  import 'bootstrap/dist/css/bootstrap.css'
-  import 'bootstrap-vue/dist/bootstrap-vue.css'
+  import Vue from 'vue';
+  import VueMaterial from 'vue-material';
+  import 'vue-material/dist/vue-material.min.css'
+  import 'vue-material/dist/theme/default.css'
   import CityCard from "./components/CityCard";
-
+  Vue.use(VueMaterial);
   export default {
     name: 'App',
     components: {
@@ -21,8 +23,6 @@
 
 <style lang="scss" >
 
-  @import 'node_modules/bootstrap/scss/bootstrap';
-  @import 'node_modules/bootstrap-vue/src/index.scss';
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -31,6 +31,13 @@
     color: #2c3e50;
     margin-top: 60px;
   }
+  @import "~vue-material/dist/theme/engine";
 
+  @include md-register-theme("default", (
+          primary: md-get-palette-color(#ffffff, 500), // The primary color of your application
+
+  ));
+
+  @import "~vue-material/dist/components/MdIcon/theme"; // Apply the Button theme
 
 </style>

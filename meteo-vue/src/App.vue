@@ -1,22 +1,17 @@
 <template>
   <div id="app">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <CityCard/>
+    <CardsList/>
   </div>
 </template>
 
 
 <script>
-  import Vue from 'vue';
-  import VueMaterial from 'vue-material';
-  import 'vue-material/dist/vue-material.min.css'
-  import 'vue-material/dist/theme/default.css'
-  import CityCard from "./components/CityCard";
-  Vue.use(VueMaterial);
+  import CardsList from "./components/CardsList";
   export default {
     name: 'App',
     components: {
-      CityCard
+      CardsList,
+
     }
   }
 </script>

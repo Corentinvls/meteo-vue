@@ -6,6 +6,8 @@ import { faWind, faTint,faThermometerHalf } from '@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import {CardPlugin} from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(CardPlugin)
 Vue.use(BootstrapVue)
@@ -20,3 +22,10 @@ new Vue({
     store,
     render: h => h(App),
 }).$mount('#app')
+
+
+
+
+
+
+
